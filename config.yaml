@@ -1,0 +1,20 @@
+service:
+  listen: ":50070"
+  base_yandex_url: "https://yandex.ru/search/touch/?service=www.yandex&ui=webmobileapp.yandex&numdoc=50&lr=213&p=0&text=%s"
+  use_proxy: "false"
+  check_proxy: "false"
+  check_proxy_url: "https://www.yandex.ru/"
+  proxy_path: "proxy.txt"
+  write_logs_to_file: "true"
+  log_path: "checker.log"
+  log_level: "debug"
+data_provider:
+  timeout_in_ms: 3000
+  proxy_test_attempt: 10
+checker:
+  init_thread_count: 8
+  max_search_iteration: 3
+  test_threads_err_threshold: 0.1
+  timeout_in_ms_between_attempts: 500
+  max_parallel_host_testing: 20
+  host_test_count: 1
