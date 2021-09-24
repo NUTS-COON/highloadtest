@@ -40,34 +40,6 @@ func main() {
 	}
 }
 
-func readServiceConfig() service.Config {
-	c := service.Config{}
-	c.ListenAddr = viper.GetString("service.listen")
-	c.UseProxy = viper.GetBool("service.use_proxy")
-
-	return c
-}
-
-func readDataProviderConfig() httpclient.Config {
-	c := httpclient.Config{}
-	c.RequestTimeoutInMs = viper.GetInt("data_provider.timeout_in_ms")
-	c.MaxProxyTestAttempts = viper.GetInt("data_provider.proxy_test_attempt")
-
-	return c
-}
-
-func readHostTesterConfig() checker.Config {
-	c := checker.Config{}
-	c.InitThreadCount = viper.GetInt("checker.init_thread_count")
-	c.MaxSearchIteration = viper.GetInt("checker.max_search_iteration")
-	c.TestThreadsErrThreshold = viper.GetFloat64("checker.test_threads_err_threshold")
-	c.TimeoutInMsBetweenAttempts = viper.GetInt("checker.timeout_in_ms_between_attempts")
-	c.MaxParallelHostTesting = viper.GetInt("checker.max_parallel_host_testing")
-	c.HostTestCount = viper.GetInt("checker.host_test_count")
-
-	return c
-}
-
 func Run(c *cobra.Command, args []string) {
 	serviceConfig := readServiceConfig()
 	dataProviderConfig := readDataProviderConfig()
@@ -147,6 +119,35 @@ func PreRunE(c *cobra.Command, args []string) error {
 
 func PostRun(c *cobra.Command, args []string) {
 	logger.Close()
+}
+
+func readServiceConfig() service.Config {
+	c := service.Config{}
+	c.ListenAddr = viper.GetString("service.listen")
+	c.UseProxy = viper.GetBool("service.use_proxy")
+
+	return c
+}
+
+func readDataProviderConfig() httpclient.Config {
+	c := httpclient.Config{}
+	c.RequestTimeoutInMs = viper.GetInt("data_provider.timeout_in_ms")
+	c.MaxProxyTestAttempts = viper.GetInt("data_provider.proxy_test_attempt")
+
+	return c
+}
+
+func readHostTesterConfig() checker.Config {
+	c := checker.Config{}
+	c.InitThreadCount = viper.GetInt("checker.init_thread_count")
+	c.MaxSearchIteration = viper.GetInt("checker.max_search_iteration")
+	c.TestThreadsErrThreshold = viper.GetFloat64("checker.test_threads_err_threshold")
+	c.TimeoutInMsBetweenAttempts = viper.GetInt("checker.timeout_in_ms_between_attempts")
+	c.MaxParallelHostTesting = viper.GetInt("checker.max_parallel_host_testing")
+	c.HostTestCount = viper.GetInt("checker.host_test_count")
+	c.CacheFail = viper.GetBool("checker.cache_fail")
+
+	return c
 }
 
 func createLogger(prefix string, lvl string) logging.Logger {

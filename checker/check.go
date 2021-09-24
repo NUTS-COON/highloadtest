@@ -21,6 +21,7 @@ type Config struct {
 	TimeoutInMsBetweenAttempts int
 	MaxParallelHostTesting     int
 	HostTestCount              int
+	CacheFail                  bool
 }
 
 type HostTester struct {
@@ -85,6 +86,9 @@ func (t *HostTester) checkItem(item search.ResourceItem, useProxy, withoutCache 
 	}
 
 	if data == nil {
+		if t.conf.CacheFail {
+			t.cachedResult[item.Host] = 0
+		}
 		return CheckResult{
 			Item:         item,
 			NotAvailable: true,

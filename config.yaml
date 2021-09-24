@@ -18,3 +18,4 @@ checker:
   timeout_in_ms_between_attempts: 500
   max_parallel_host_testing: 20
   host_test_count: 1
+  cache_fail: "true"
