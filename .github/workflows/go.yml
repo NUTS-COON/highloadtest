@@ -54,7 +54,7 @@ jobs:
         
   tests-integrations:
     needs: lint
-    if: needs.lint.result == 'success' || needs.lint.result == 'failure'
+    if: always()
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
