@@ -6,8 +6,6 @@ name: Go 2
 on:
   push:
     branches: [ "pipelines" ]
-  pull_request:
-    branches: [ "pipelines" ]
 
 jobs:
         
